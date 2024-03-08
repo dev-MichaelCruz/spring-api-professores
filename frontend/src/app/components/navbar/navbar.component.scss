@@ -1,0 +1,17 @@
+* {
+    justify-content: center;
+    padding: .30rem;
+}
+
+.bg-body-tertiary {
+    --bs-bg-opacity: 100;
+    background-color: rgb(124 172 236) !important;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+    color: #fff;
+    background-color: rgb(55 122 201);
+    border-radius: 1rem;
+    margin: auto;
+}

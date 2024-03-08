@@ -1,0 +1,60 @@
+<div class="modal" tabindex="-1" id="modalcadastro">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Cadastrar Professor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+        </div>
+        <form class="m-3" [formGroup]="cadastroForm">
+            
+            <div>
+                <label class="form-label">Nome:</label>
+                <input type="text" name="nome" class="form-control w-100 mb-2" formControlName="nome">
+                <small class="text-danger" *ngIf="cadastroForm.get('nome')?.invalid && cadastroForm.get('nome')?.touched" style="color: red">
+                    *O campo 'Nome' é obrigatório!
+                </small>
+            </div>
+            
+            <div>
+                <label>Matéria:</label>
+                <input type="text" name="materia" class="form-control w-100 mb-2" formControlName="materia" >
+                <small class="text-danger" *ngIf="cadastroForm.get('materia')?.invalid && cadastroForm.get('materia')?.touched" style="color: red">
+                    *O campo 'Matéria' é obrigatório!
+                </small>
+            </div>
+            
+            <div>
+                <label>E-mail:</label>
+                <input type="email" name="email" class="form-control w-100" formControlName="email" >
+                <small class="text-danger" *ngIf="cadastroForm.get('email')?.invalid && cadastroForm.get('email')?.touched" style="color: red">
+                    *O campo 'E-mail' é obrigatório!
+                </small>
+            </div>
+
+            <div>
+                <label>Endereço:</label>
+                <input type="text" name="endereco" class="form-control w-100 mb-2" formControlName="endereco" >
+                <small class="text-danger" *ngIf="cadastroForm.get('endereco')?.invalid && cadastroForm.get('endereco')?.touched" style="color: red">
+                    *O campo 'Endereço' é obrigatório!
+                </small>
+            </div>
+
+            <div>
+                <label>Telefone:</label>
+                <input type="number" name="telefone" class="form-control w-100 mb-2" formControlName="telefone" >
+                <small class="text-danger" *ngIf="cadastroForm.get('telefone')?.invalid && cadastroForm.get('telefone')?.touched" style="color: red">
+                    *O campo 'Telefone' é obrigatório!
+                </small>
+            </div>
+
+        </form>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary btn-success" (click)="adicionarProfessor()" data-bs-dismiss="modal" [disabled]="cadastroForm.invalid">Finalizar Cadastro</button>
+        </div>
+
+      </div>
+    </div>
+  </div>

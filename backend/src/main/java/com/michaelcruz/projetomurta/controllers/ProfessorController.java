@@ -6,6 +6,7 @@ import com.michaelcruz.projetomurta.repositories.ProfessorRepository;
 import com.michaelcruz.projetomurta.services.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,13 +29,13 @@ public class ProfessorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Professor adicionarProfessor(@RequestBody Professor professor) throws Exception{
+    public ResponseEntity<Professor> adicionarProfessor(@RequestBody Professor professor) throws Exception{
          return professorService.adicionarProfessor(professor);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Professor atualizarProfessor(@PathVariable Long id, @RequestBody Professor professor) throws Exception{
+    public ResponseEntity<Professor> atualizarProfessor(@PathVariable Long id, @RequestBody Professor professor) throws Exception{
         return professorService.atualizarProfessor(id, professor);
     }
 

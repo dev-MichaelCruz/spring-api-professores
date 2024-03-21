@@ -3,6 +3,7 @@ package com.michaelcruz.projetomurta.services;
 import com.michaelcruz.projetomurta.models.Professor;
 import com.michaelcruz.projetomurta.repositories.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,19 +21,21 @@ public class ProfessorService {
         return professorRepository.findAll();
     }
 
-    public Professor adicionarProfessor(@RequestBody Professor professor) throws Exception {
+    public ResponseEntity<Professor> adicionarProfessor(@RequestBody Professor professor) throws Exception {
         if(professor.getNome().isEmpty() ||
                 professor.getMateria().isEmpty() || professor.getTelefone().isEmpty() ||
                 professor.getEmail().isEmpty() || professor.getEndereco().isEmpty()){
 
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
             throw new Exception("Erro ao cadastrar professor");
 
         } else {
-           return  professorRepository.save(professor);
+           professorRepository.save(professor);
+           return ResponseEntity.status(HttpStatus.OK).build();
         }
     }
+    public ResponseEntity<Professor> atualizarProfessor(Long id, Professor professor){
 
-    public Professor atualizarProfessor(Long id, Professor professor) throws Exception{
         Optional<Professor> optionalProfessor = professorRepository.findById(id);
 
         try {
@@ -48,14 +51,14 @@ public class ProfessorService {
 
                 professorRepository.save(professorExistente);
 
-                return professorExistente;
+                return ResponseEntity.status(HttpStatus.OK).build();
             }
 
             return null;
 
         } catch (Exception ex){
             System.out.println("Erro ao atualizar professor");
-            return professor;
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
@@ -69,6 +72,5 @@ public class ProfessorService {
             ResponseEntity.notFound().build();
         }
     }
-
 
 }
